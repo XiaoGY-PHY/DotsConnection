@@ -1,5 +1,7 @@
 
 #include "DotsConnection/DotsConnection.h"
+#include "DotsConnection/DotsHelixFitter.h"
+#include "DotsConnection/TrkFitFun.h"
 
 #include "GaudiKernel/MsgStream.h"
 //#include "GaudiKernel/ISvcLocator.h"
