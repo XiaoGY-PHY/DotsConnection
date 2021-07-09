@@ -515,95 +515,95 @@ void DotsConnection::associateDigisToMcParticles()
 			cout<<"MC particle "<<trkIdx<<", pdg code "<<myVecPDG[i]<<endl;
 
 		// --- associate CGEM clusters through CGEM MC hits
-		/*
-		int CgemCluster[3][2]={0,0,0,0,0,0};// [layer][x/v]
-		myVecCgemXcluster.clear();
-		myVecCgemVcluster.clear();
-		myVecCgem1DCluster.clear();
-		for(int l=0; l<3; l++)
-		{
-			for(int m=0; m<2; m++)
-			{
-				myVecCgemXCluIdx[l][m].clear();
-				myVecCgemVCluIdx[l][m].clear();
-			}
-		}
-		Event::CgemMcHitCol::iterator iter_CgemMcHit = cgemMcHitCol->begin();
-		for(; iter_CgemMcHit!=cgemMcHitCol->end(); iter_CgemMcHit++ )
-		{
-			string creatorProcess = (*iter_CgemMcHit)->GetCreatorProcess();
-			if(myDebug)
-				cout<<"      CGEM MC hit from process "<<creatorProcess;
-			if(creatorProcess=="Generator"||creatorProcess=="Decay")// only from generator or decay
-			{
-				//cout<<", trk id "<<(*iter_CgemMcHit)->GetTrackID()<<endl;
-				if((*iter_CgemMcHit)->GetTrackID()!=trkIdx) continue; // keep only matched MC hits
-				//cout<<"      is secondary "<<(*iter_CgemMcHit)->GetIsSecondary()<<endl;
-				const vector<int> & vec_xCluster = (*iter_CgemMcHit)->GetXclusterIdxVec();// find the X-clusters
-				int nXCluster=vec_xCluster.size();
-				for(int j=0; j<nXCluster; j++)
-				{
-					iter_cluster=iter_cluster_begin+vec_xCluster[j];
-					int clusterId = (*iter_cluster)->getclusterid();
-					int layer=(*iter_cluster)->getlayerid();
-					int sheet=(*iter_cluster)->getsheetid();
-					if(myDebug)
-						cout<<"          find one X-cluster on layer "<<layer;
-					if(CgemCluster[layer][0]==0) 
-					{
-						myVecCgemXcluster.push_back(*iter_cluster);
-						myVecCgem1DCluster.push_back(*iter_cluster);
-						myVecCgemXCluIdx[layer][sheet].push_back(clusterId);
-						CgemCluster[layer][0]++;
-						if(myDebug)
-							cout<<", associated.   "<<endl;
-					}
-				}
-				//cout<<" X-clusters done "<<endl;
-				const vector<int> & vec_vCluster = (*iter_CgemMcHit)->GetVclusterIdxVec();// find the V-clusters
-				int nVCluster=vec_vCluster.size();
-				for(int j=0; j<nVCluster; j++)
-				{
-					iter_cluster=iter_cluster_begin+vec_vCluster[j];
-					int clusterId = (*iter_cluster)->getclusterid();
-					int layer=(*iter_cluster)->getlayerid();
-					int sheet=(*iter_cluster)->getsheetid();
-					if(myDebug)
-						cout<<"          find one V-cluster on layer "<<layer;
-					if(CgemCluster[layer][1]==0) 
-					{
-						myVecCgemVcluster.push_back(*iter_cluster);
-						myVecCgem1DCluster.push_back(*iter_cluster);
-						myVecCgemVCluIdx[layer][sheet].push_back(clusterId);
-						CgemCluster[layer][1]++;
-						if(myDebug)
-							cout<<", associated.    "<<endl;
-					}
-				}
-			}
-			if(myDebug) cout<<endl;
-		}// end of looping CGEM MC hits
-		*/
+		
+		// int CgemCluster[3][2]={0,0,0,0,0,0};// [layer][x/v]
+		// myVecCgemXcluster.clear();
+		// myVecCgemVcluster.clear();
+		// myVecCgem1DCluster.clear();
+		// for(int l=0; l<3; l++)
+		// {
+		// 	for(int m=0; m<2; m++)
+		// 	{
+		// 		myVecCgemXCluIdx[l][m].clear();
+		// 		myVecCgemVCluIdx[l][m].clear();
+		// 	}
+		// }
+		// Event::CgemMcHitCol::iterator iter_CgemMcHit = cgemMcHitCol->begin();
+		// for(; iter_CgemMcHit!=cgemMcHitCol->end(); iter_CgemMcHit++ )
+		// {
+		// 	string creatorProcess = (*iter_CgemMcHit)->GetCreatorProcess();
+		// 	if(myDebug)
+		// 		cout<<"      CGEM MC hit from process "<<creatorProcess;
+		// 	if(creatorProcess=="Generator"||creatorProcess=="Decay")// only from generator or decay
+		// 	{
+		// 		//cout<<", trk id "<<(*iter_CgemMcHit)->GetTrackID()<<endl;
+		// 		if((*iter_CgemMcHit)->GetTrackID()!=trkIdx) continue; // keep only matched MC hits
+		// 		//cout<<"      is secondary "<<(*iter_CgemMcHit)->GetIsSecondary()<<endl;
+		// 		const vector<int> & vec_xCluster = (*iter_CgemMcHit)->GetXclusterIdxVec();// find the X-clusters
+		// 		int nXCluster=vec_xCluster.size();
+		// 		for(int j=0; j<nXCluster; j++)
+		// 		{
+		// 			iter_cluster=iter_cluster_begin+vec_xCluster[j];
+		// 			int clusterId = (*iter_cluster)->getclusterid();
+		// 			int layer=(*iter_cluster)->getlayerid();
+		// 			int sheet=(*iter_cluster)->getsheetid();
+		// 			if(myDebug)
+		// 				cout<<"          find one X-cluster on layer "<<layer;
+		// 			if(CgemCluster[layer][0]==0) 
+		// 			{
+		// 				myVecCgemXcluster.push_back(*iter_cluster);
+		// 				myVecCgem1DCluster.push_back(*iter_cluster);
+		// 				myVecCgemXCluIdx[layer][sheet].push_back(clusterId);
+		// 				CgemCluster[layer][0]++;
+		// 				if(myDebug)
+		// 					cout<<", associated.   "<<endl;
+		// 			}
+		// 		}
+		// 		//cout<<" X-clusters done "<<endl;
+		// 		const vector<int> & vec_vCluster = (*iter_CgemMcHit)->GetVclusterIdxVec();// find the V-clusters
+		// 		int nVCluster=vec_vCluster.size();
+		// 		for(int j=0; j<nVCluster; j++)
+		// 		{
+		// 			iter_cluster=iter_cluster_begin+vec_vCluster[j];
+		// 			int clusterId = (*iter_cluster)->getclusterid();
+		// 			int layer=(*iter_cluster)->getlayerid();
+		// 			int sheet=(*iter_cluster)->getsheetid();
+		// 			if(myDebug)
+		// 				cout<<"          find one V-cluster on layer "<<layer;
+		// 			if(CgemCluster[layer][1]==0) 
+		// 			{
+		// 				myVecCgemVcluster.push_back(*iter_cluster);
+		// 				myVecCgem1DCluster.push_back(*iter_cluster);
+		// 				myVecCgemVCluIdx[layer][sheet].push_back(clusterId);
+		// 				CgemCluster[layer][1]++;
+		// 				if(myDebug)
+		// 					cout<<", associated.    "<<endl;
+		// 			}
+		// 		}
+		// 	}
+		// 	if(myDebug) cout<<endl;
+		// }// end of looping CGEM MC hits
+		
 		
 		myVecMdcDigi.clear();
 		int nMdcXHits(0), nMdcVHits(0);
 		
 		// --- associate MDC hits through MC track index
-		/*
-		vector<MdcDigi*>::iterator iter_mdcDigi = mdcDigiVec.begin();
-		for(; iter_mdcDigi!=mdcDigiVec.end(); iter_mdcDigi++) 
-		{
-			int mcTrkIdx = (*iter_mdcDigi)->getTrackIndex();
-			if(mcTrkIdx==trkIdx) 
-			{
-				//myVecMdcDigi.push_back((*iter_mdcDigi));
-				Identifier id = (*iter_mdcDigi)->identify();
-				int layer = MdcID::layer(id);
-				int wire  = MdcID::wire(id);
-				//cout<<"      MDC digi on layer "<<layer<<" wire "<<wire<<" associated"<<endl;
-				//cout<<"      MDC digi on layer "<<layer<<" wire "<<wire<<" matched"<<endl;
-			}
-		}*/
+		
+		// vector<MdcDigi*>::iterator iter_mdcDigi = mdcDigiVec.begin();
+		// for(; iter_mdcDigi!=mdcDigiVec.end(); iter_mdcDigi++) 
+		// {
+		// 	int mcTrkIdx = (*iter_mdcDigi)->getTrackIndex();
+		// 	if(mcTrkIdx==trkIdx) 
+		// 	{
+		// 		//myVecMdcDigi.push_back((*iter_mdcDigi));
+		// 		Identifier id = (*iter_mdcDigi)->identify();
+		// 		int layer = MdcID::layer(id);
+		// 		int wire  = MdcID::wire(id);
+		// 		//cout<<"      MDC digi on layer "<<layer<<" wire "<<wire<<" associated"<<endl;
+		// 		//cout<<"      MDC digi on layer "<<layer<<" wire "<<wire<<" matched"<<endl;
+		// 	}
+		// }
 		
 		// --- associate MDC hits through MdcMcHits 
 		Event::MdcMcHitCol::iterator 
@@ -671,7 +671,7 @@ void DotsConnection::associateDigisToMcParticles()
 			a_helix(5)=myVecHelix[i][4];
 			KalmanFit::Helix  ini_helix(origin,a_helix);
 			myDotsHelixFitter.setInitialHelix(ini_helix);
-			myDotsHelixFitter.setCgemClusters(myVecCgem1DCluster);
+			// myDotsHelixFitter.setCgemClusters(myVecCgem1DCluster);
 			myDotsHelixFitter.setDChits(myVecMdcDigi,T0);
 
 			myDotsHelixFitter.fitCircleOnly();
@@ -687,22 +687,22 @@ void DotsConnection::associateDigisToMcParticles()
 					if(myNtProd&1 && nIter==1) {
 						myNHitsCircle=0;
 						// --- fill CGEM clusters
-						vector<double> vecChiCgem = myDotsHelixFitter.getVecChiCgemCluster();
-						vector<const RecCgemCluster*>::iterator it_cluster=myVecCgem1DCluster.begin();
-						int i_cluster=0;
-						for(; it_cluster!=myVecCgem1DCluster.end(); it_cluster++, i_cluster++)
-						{
-							int flag=(*it_cluster)->getflag();
-							if(flag!=0) continue;
-							int layer=(*it_cluster)->getlayerid();
-							//if(flag==1) layer=-1*(layer+1);// for V-cluster
-							if(myNHitsCircle<100) 
-							{
-								myLayerHitsCircle[myNHitsCircle]=layer;
-								myChiHitsCircle[myNHitsCircle]  =vecChiCgem[i_cluster];
-								myNHitsCircle++;
-							}
-						}
+						// vector<double> vecChiCgem = myDotsHelixFitter.getVecChiCgemCluster();
+						// vector<const RecCgemCluster*>::iterator it_cluster=myVecCgem1DCluster.begin();
+						// int i_cluster=0;
+						// for(; it_cluster!=myVecCgem1DCluster.end(); it_cluster++, i_cluster++)
+						// {
+						// 	int flag=(*it_cluster)->getflag();
+						// 	if(flag!=0) continue;
+						// 	int layer=(*it_cluster)->getlayerid();
+						// 	//if(flag==1) layer=-1*(layer+1);// for V-cluster
+						// 	if(myNHitsCircle<100) 
+						// 	{
+						// 		myLayerHitsCircle[myNHitsCircle]=layer;
+						// 		myChiHitsCircle[myNHitsCircle]  =vecChiCgem[i_cluster];
+						// 		myNHitsCircle++;
+						// 	}
+						// }
 
 						// --- fill MDC hits
 						vector<const MdcDigi*>::iterator it_digi=myVecMdcDigi.begin();
@@ -783,21 +783,21 @@ void DotsConnection::associateDigisToMcParticles()
 
 			if(myNtProd&1) {
 				// --- fill CGEM clusters
-				vector<double> vecChiCgem = myDotsHelixFitter.getVecChiCgemCluster();
-				vector<const RecCgemCluster*>::iterator it_cluster=myVecCgem1DCluster.begin();
-				int i_cluster=0;
-				for(; it_cluster!=myVecCgem1DCluster.end(); it_cluster++, i_cluster++)
-				{
-					int flag=(*it_cluster)->getflag();
-					int layer=(*it_cluster)->getlayerid();
-					if(flag==1) layer=-1*(layer+1);// for V-cluster
-					if(myNHits<100) 
-					{
-						myLayerHits[myNHits]=layer;
-						myChiHits[myNHits]  =vecChiCgem[i_cluster];
-						myNHits++;
-					}
-				}
+				// vector<double> vecChiCgem = myDotsHelixFitter.getVecChiCgemCluster();
+				// vector<const RecCgemCluster*>::iterator it_cluster=myVecCgem1DCluster.begin();
+				// int i_cluster=0;
+				// for(; it_cluster!=myVecCgem1DCluster.end(); it_cluster++, i_cluster++)
+				// {
+				// 	int flag=(*it_cluster)->getflag();
+				// 	int layer=(*it_cluster)->getlayerid();
+				// 	if(flag==1) layer=-1*(layer+1);// for V-cluster
+				// 	if(myNHits<100) 
+				// 	{
+				// 		myLayerHits[myNHits]=layer;
+				// 		myChiHits[myNHits]  =vecChiCgem[i_cluster];
+				// 		myNHits++;
+				// 	}
+				// }
 
 				// --- fill MDC hits
 				vector<const MdcDigi*>::iterator it_digi=myVecMdcDigi.begin();
@@ -902,8 +902,8 @@ void DotsConnection::testDotsHelixFitterAllHits()
 		aMapDcDigi[myDotsHelixFitter.getFlightLength(*iter_mdcDigi)] = *iter_mdcDigi;
 	}
 
-	vector<const RecCgemCluster*> vecCgemCluster = getCgemClusterVec();
-	myDotsHelixFitter.setCgemClusters(vecCgemCluster);
+	// vector<const RecCgemCluster*> vecCgemCluster = getCgemClusterVec();
+	// myDotsHelixFitter.setCgemClusters(vecCgemCluster);
 
 	myDotsHelixFitter.fitCircleOnly();
 	myDotsHelixFitter.calculateNewHelix();
@@ -920,52 +920,52 @@ void DotsConnection::testDotsHelixFitterAllHits()
 	myNtHelixFitter->write();
 }
 
-vector<const RecCgemCluster*> DotsConnection::getCgemClusterVec(int view)
-{
-	vector<const RecCgemCluster*> aVecCgemCluster;
-	SmartDataPtr<RecCgemClusterCol> aCgemClusterCol(eventSvc(),"/Event/Recon/RecCgemClusterCol");
-	if(aCgemClusterCol)
-	{
-		RecCgemClusterCol::iterator iter_cluster=aCgemClusterCol->begin();
-		int nCluster = aCgemClusterCol->size();
-		//cout<<"DotsConnection::getCgemClusterVec() finds a RecCgemClusterCol with "<<nCluster<<" clusters!"<<endl;
-		//		cout<<"~~~~~~~~~~~~~~~~~~~~~~~~ check RecCgemClusterCol:"<<endl;
-		//		cout    <<setw(10)<<"idx"
-		//			<<setw(10)<<"layer"
-		//			<<setw(10)<<"sheet"
-		//			<<setw(10)<<"XVFlag"
-		//			<<setw(10)<<"id1 ~"
-		//			<<setw(10)<<"id2"
-		//			<<setw(15)<<"phi"
-		//			<<setw(15)<<"V"
-		//			<<setw(15)<<"z"
-		//			<<endl;
-		for(; iter_cluster!=aCgemClusterCol->end(); iter_cluster++)
-		{
-			//			cout    <<setw(10)<<(*iter_cluster)->getclusterid()
-			//				<<setw(10)<<(*iter_cluster)->getlayerid()
-			//				<<setw(10)<<(*iter_cluster)->getsheetid()
-			//				<<setw(10)<<(*iter_cluster)->getflag()
-			//				<<setw(10)<<(*iter_cluster)->getclusterflagb()
-			//				<<setw(10)<<(*iter_cluster)->getclusterflage()
-			//				<<setw(15)<<setprecision(10)<<(*iter_cluster)->getrecphi()
-			//				<<setw(15)<<setprecision(10)<<(*iter_cluster)->getrecv()
-			//				<<setw(15)<<setprecision(10)<<(*iter_cluster)->getRecZ()
-			//				<<endl;
-			int flag = (*iter_cluster)->getflag();
-			if(view==0||view==1) 
-			{
-				if(flag==view) aVecCgemCluster.push_back(*iter_cluster);
-			}else if(view=2)
-			{
-				if(flag==0||flag==1) aVecCgemCluster.push_back(*iter_cluster);
-			}
-		}
-		//		cout<<"~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
-	}
-	else cout<<"DotsConnection::getCgemClusterVec() does not find RecCgemClusterCol!"<<endl;
-	return aVecCgemCluster;
-}
+// vector<const RecCgemCluster*> DotsConnection::getCgemClusterVec(int view)
+// {
+// 	vector<const RecCgemCluster*> aVecCgemCluster;
+// 	SmartDataPtr<RecCgemClusterCol> aCgemClusterCol(eventSvc(),"/Event/Recon/RecCgemClusterCol");
+// 	if(aCgemClusterCol)
+// 	{
+// 		RecCgemClusterCol::iterator iter_cluster=aCgemClusterCol->begin();
+// 		int nCluster = aCgemClusterCol->size();
+// 		//cout<<"DotsConnection::getCgemClusterVec() finds a RecCgemClusterCol with "<<nCluster<<" clusters!"<<endl;
+// 		//		cout<<"~~~~~~~~~~~~~~~~~~~~~~~~ check RecCgemClusterCol:"<<endl;
+// 		//		cout    <<setw(10)<<"idx"
+// 		//			<<setw(10)<<"layer"
+// 		//			<<setw(10)<<"sheet"
+// 		//			<<setw(10)<<"XVFlag"
+// 		//			<<setw(10)<<"id1 ~"
+// 		//			<<setw(10)<<"id2"
+// 		//			<<setw(15)<<"phi"
+// 		//			<<setw(15)<<"V"
+// 		//			<<setw(15)<<"z"
+// 		//			<<endl;
+// 		for(; iter_cluster!=aCgemClusterCol->end(); iter_cluster++)
+// 		{
+// 			//			cout    <<setw(10)<<(*iter_cluster)->getclusterid()
+// 			//				<<setw(10)<<(*iter_cluster)->getlayerid()
+// 			//				<<setw(10)<<(*iter_cluster)->getsheetid()
+// 			//				<<setw(10)<<(*iter_cluster)->getflag()
+// 			//				<<setw(10)<<(*iter_cluster)->getclusterflagb()
+// 			//				<<setw(10)<<(*iter_cluster)->getclusterflage()
+// 			//				<<setw(15)<<setprecision(10)<<(*iter_cluster)->getrecphi()
+// 			//				<<setw(15)<<setprecision(10)<<(*iter_cluster)->getrecv()
+// 			//				<<setw(15)<<setprecision(10)<<(*iter_cluster)->getRecZ()
+// 			//				<<endl;
+// 			int flag = (*iter_cluster)->getflag();
+// 			if(view==0||view==1) 
+// 			{
+// 				if(flag==view) aVecCgemCluster.push_back(*iter_cluster);
+// 			}else if(view=2)
+// 			{
+// 				if(flag==0||flag==1) aVecCgemCluster.push_back(*iter_cluster);
+// 			}
+// 		}
+// 		//		cout<<"~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+// 	}
+// 	else cout<<"DotsConnection::getCgemClusterVec() does not find RecCgemClusterCol!"<<endl;
+// 	return aVecCgemCluster;
+// }
 
 void DotsConnection::testDotsHelixFitterPartHits()
 {
@@ -1095,9 +1095,9 @@ bool DotsConnection::registerRecMdcTrack()
 	return true;
 }
 
-bool sortCluster(const RecCgemCluster* clusterA , const RecCgemCluster* clusterB){
-	return clusterA->getlayerid()<clusterB->getlayerid();
-}
+// bool sortCluster(const RecCgemCluster* clusterA , const RecCgemCluster* clusterB){
+// 	return clusterA->getlayerid()<clusterB->getlayerid();
+// }
 
 bool DotsConnection::saveARecMdcTrack()
 {
@@ -1179,41 +1179,41 @@ bool DotsConnection::saveARecMdcTrack()
 	int    layerMaxFltLen=-1;
 
 	// --- CGEM clusters
-	ClusterRefVec clusterRefVec;
-	map<int,int> clusterFitStat;
-	SmartDataPtr<RecCgemClusterCol> aCgemClusterCol(eventSvc(),"/Event/Recon/RecCgemClusterCol");
-	if(!aCgemClusterCol) cout<<"DotsConnection::saveARecMdcTrack() does not find RecCgemClusterCol!"<<endl;
-	RecCgemClusterCol::iterator iter_cluster_begin=aCgemClusterCol->begin();
-	RecCgemClusterCol::iterator iter_cluster=iter_cluster_begin;
-	for(; iter_cluster!=aCgemClusterCol->end(); iter_cluster++)
-	{
-		int flag = (*iter_cluster)->getflag();
-		if(flag!=2) continue;// skip 1D clusters
-		int layer=(*iter_cluster)->getlayerid();
-		int sheet=(*iter_cluster)->getsheetid();
-		int idXClu = (*iter_cluster)->getclusterflagb();
-		bool matchX=false;
-		vector<int>::iterator iter=myVecCgemXCluIdx[layer][sheet].begin();
-		for(; iter!=myVecCgemXCluIdx[layer][sheet].end(); iter++)
-			if((*iter)==idXClu) matchX=true;
-		if(!matchX) continue;
-		int idVClu = (*iter_cluster)->getclusterflage();
-		bool matchV=false;
-		iter=myVecCgemVCluIdx[layer][sheet].begin();
-		for(; iter!=myVecCgemVCluIdx[layer][sheet].end(); iter++)
-			if((*iter)==idVClu) matchV=true;
-		if(matchV) 
-		{
-			const RecCgemCluster* recCgemCluster = (*iter_cluster);
-			int clusterid = recCgemCluster->getclusterid();
-			clusterRefVec.push_back(recCgemCluster);
-			clusterFitStat[clusterid] = 1;
-			if(maxLayerId<layer)
-			{
-				maxLayerId=layer;
-			}
-		}
-	}
+	// ClusterRefVec clusterRefVec;
+	// map<int,int> clusterFitStat;
+	// SmartDataPtr<RecCgemClusterCol> aCgemClusterCol(eventSvc(),"/Event/Recon/RecCgemClusterCol");
+	// if(!aCgemClusterCol) cout<<"DotsConnection::saveARecMdcTrack() does not find RecCgemClusterCol!"<<endl;
+	// RecCgemClusterCol::iterator iter_cluster_begin=aCgemClusterCol->begin();
+	// RecCgemClusterCol::iterator iter_cluster=iter_cluster_begin;
+	// for(; iter_cluster!=aCgemClusterCol->end(); iter_cluster++)
+	// {
+	// 	int flag = (*iter_cluster)->getflag();
+	// 	if(flag!=2) continue;// skip 1D clusters
+	// 	int layer=(*iter_cluster)->getlayerid();
+	// 	int sheet=(*iter_cluster)->getsheetid();
+	// 	int idXClu = (*iter_cluster)->getclusterflagb();
+	// 	bool matchX=false;
+	// 	vector<int>::iterator iter=myVecCgemXCluIdx[layer][sheet].begin();
+	// 	for(; iter!=myVecCgemXCluIdx[layer][sheet].end(); iter++)
+	// 		if((*iter)==idXClu) matchX=true;
+	// 	if(!matchX) continue;
+	// 	int idVClu = (*iter_cluster)->getclusterflage();
+	// 	bool matchV=false;
+	// 	iter=myVecCgemVCluIdx[layer][sheet].begin();
+	// 	for(; iter!=myVecCgemVCluIdx[layer][sheet].end(); iter++)
+	// 		if((*iter)==idVClu) matchV=true;
+	// 	if(matchV) 
+	// 	{
+	// 		const RecCgemCluster* recCgemCluster = (*iter_cluster);
+	// 		int clusterid = recCgemCluster->getclusterid();
+	// 		clusterRefVec.push_back(recCgemCluster);
+	// 		clusterFitStat[clusterid] = 1;
+	// 		if(maxLayerId<layer)
+	// 		{
+	// 			maxLayerId=layer;
+	// 		}
+	// 	}
+	// }
 
 
 	// --- MDC hits
@@ -1257,10 +1257,10 @@ bool DotsConnection::saveARecMdcTrack()
 		cout<<"track "<<trackId<<", "<<nMdcHitsKept<<"/"<<nMdcHits<<" hits kept"<<endl;
 
 	// --- phi term (phi for the outmost hit/cluster)
-	if(maxLayerId>=0&&maxLayerId<3) {
-		double rmax=myDotsHelixFitter.getRmidGapCgem(maxLayerId);
-		fltLen=aHelix.flightLength(rmax);
-	}
+	// if(maxLayerId>=0&&maxLayerId<3) {
+	// 	double rmax=myDotsHelixFitter.getRmidGapCgem(maxLayerId);
+	// 	fltLen=aHelix.flightLength(rmax);
+	// }
 	if(fltLen>0) fiTerm=-fltLen*sin(theta)/aHelix.radius();
 	else cout<<"fltLen<0!"<<endl;
 	recMdcTrack->setFiTerm(fiTerm);
