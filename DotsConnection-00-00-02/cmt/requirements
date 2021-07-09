@@ -1,0 +1,21 @@
+package DotsConnection
+author Liangliang WANG <llwang@ihep.ac.cn>
+
+use GaudiInterface GaudiInterface-01-* External
+use BesCLHEP       BesCLHEP-*          External
+use MdcGeomSvc     MdcGeomSvc-*        Mdc 
+use MdcCalibFunSvc MdcCalibFunSvc-*    Mdc
+#use CgemCalibFunSvc CgemCalibFunSvc-*  Cgem
+use RawDataProviderSvc  RawDataProviderSvc-*    Event
+use MdcUtilitySvc  MdcUtilitySvc-*     Mdc/MdcCheckUtil
+use MdcRawEvent    MdcRawEvent-*       Mdc
+#use CgemGeomSvc    CgemGeomSvc-*       Cgem
+#use CgemRecEvent   CgemRecEvent-*      Cgem
+
+use KalFitAlg		KalFitAlg-*    Reconstruction
+macro KalFitAlg_linkopts ' -L$(bin) -lKalFitAlg '
+
+library DotsConnection *.cxx
+#library DotsConnection *.cxx components/*.cxx
+apply_pattern component_library 
+#apply_pattern dual_use_library files=*.cxx
