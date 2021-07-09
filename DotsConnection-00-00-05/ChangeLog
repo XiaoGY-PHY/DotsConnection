@@ -1,0 +1,42 @@
+
+2021-04-12 WANG Liangliang <llwang@ihep.ac.cn>
+	* DotsConnection.cxx: sort CGEM clusters before saving
+
+2021-02-23 WANG Liangliang <llwang@ihep.ac.cn>
+           * update share/DotsConnection_options.txt
+	   * DotsConnection/DotsConnection.h 
+	       add myDebug, myNtProd, myDriftTimeUpLimit, myMdcHitChi2Cut, etc
+	       add getMcFinalChargedStates(), associateDigisToMcParticles(),
+	           registerRecMdcTrack(), saveARecMdcTrack()
+	       modify getCgemClusterVec() to getCgemClusterVec(int view=0)
+	       needs McTruth-00-04-10 or above
+	   * src/DotsConnection.cxx
+	       add properties: Ntuple, driftTimeUpLimit, MdcHitChi2Cut
+	   * DotsConnection/DotsHelixFitter.h
+	       add getClassHelix(), getRmidGapCgem()
+
+
+2020-12-10 WANG Liangliang <llwang@ihep.ac.cn>
+           * DotsHelixFitter: add getEa(), makeRecMdcHit(...),
+	     makeRecMdcHitVec(...), myLeftRight, myDriftDist and so on
+
+
+2020-11-23 WANG Liangliang <llwang@ihep.ac.cn>
+	* DotsHelixFitter::calculateNewHelix() 
+	  if(n_chi2_increase>2) -> if(n_chi2_increase>2||totChi2>1000000)
+	* add myMinXhitsInCircleFit; myMinVhitsInHelixFit; myMinHitsInHelixFit; 
+	      myDchi2Converge; myDchi2Diverge; myMaxNChi2Increase; myChi2Diverge;
+
+
+2020-11-16 WANG Liangliang <llwang@ihep.ac.cn>
+	* DotsHelixFitter
+          add setMaxIterations(int), getChi2(), deactiveHits(double), 
+	      deactiveHits(int,int), getNActiveHits(), 
+	      vector<int> myAmbiguityMdcDigi, vector<int> myMdcDigiIsActive,
+	      int myWireFlag[43], int myNWire[43]
+	* TrkFitFun
+	  robustness improved
+
+
+2020-09-08 WANG Liangliang <llwang@ihep.ac.cn>
+	   * first import
