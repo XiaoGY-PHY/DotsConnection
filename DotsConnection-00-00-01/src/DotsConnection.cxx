@@ -1274,8 +1274,8 @@ bool DotsConnection::saveARecMdcTrack()
 
 	// --- setN* functions called in setVec* functions
 	recMdcTrack->setVecHits(hitRefVec);
-	std::sort(clusterRefVec.begin(),clusterRefVec.end(),sortCluster);
-	recMdcTrack->setVecClusters(clusterRefVec,clusterFitStat);
+	// std::sort(clusterRefVec.begin(),clusterRefVec.end(),sortCluster);
+	// recMdcTrack->setVecClusters(clusterRefVec,clusterFitStat);
 	myRecMdcTrackCol->push_back(recMdcTrack);
 
 
