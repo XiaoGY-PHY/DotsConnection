@@ -7,11 +7,10 @@
 #include "$MDCCALIBFUNSVCROOT/share/job_MdcCalibFunSvc.txt"
 #include "$MDCUTILITYSVCROOT/share/jobOptions_MdcUtilitySvc.txt"
 #include "$RAWDATAPROVIDERSVCROOT/share/jobOptions_RawDataProviderSvc.txt"
-//#include "$CGEMGEOMSVCROOT/share/jobOption_CgemGeomSvc.txt"
+#include "$CGEMGEOMSVCROOT/share/jobOption_CgemGeomSvc.txt"
 
 //load relevant libraries
-//ApplicationMgr.DLLs += { "DotsConnection", "MdcGeomSvc", "CgemGeomSvc" };
-ApplicationMgr.DLLs += { "DotsConnection", "MdcGeomSvc" };
+ApplicationMgr.DLLs += { "DotsConnection", "MdcGeomSvc", "CgemGeomSvc" };
 
 //top algorithms to be run
 ApplicationMgr.TopAlg += { "DotsConnection" };
