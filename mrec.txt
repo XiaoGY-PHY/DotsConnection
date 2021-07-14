@@ -1,0 +1,63 @@
+//input ROOT MC data
+#include "$ROOTIOROOT/share/jobOptions_ReadRoot.txt"
+#include "$OFFLINEEVENTLOOPMGRROOT/share/OfflineEventLoopMgr_Option.txt"
+
+// background mixing
+//#include "$BESEVENTMIXERROOT/share/jobOptions_EventMixer_rec.txt"
+
+#include "$CALIBSVCROOT/share/job-CalibData.txt"
+#include "$MAGNETICFIELDROOT/share/MagneticField.txt"
+#include "$ESTIMEALGROOT/share/job_EsTimeAlg.txt"
+//#include "$T0DUMMYROOT/share/job_T0Dummy.txt"
+
+// PAT+TSF method for MDC reconstruction
+//#include "$MDCHOUGHFINDERROOT/share/jobOptions_MdcPatTsfHoughRec.txt"
+//#include "$MDCXRECOROOT/share/jobOptions_MdcPatTsfRec.txt"
+//RawDataProviderSvc.skipLayers = {0,1,2,3,4,5,6,7};
+
+// --- DotsConnection
+#include "$DOTSCONNECTIONROOT/share/DotsConnection_options.txt"
+DotsConnection.ChiCut_circle=20;
+DotsConnection.ChiCut_helix=7;
+DotsConnection.MdcHitChi2Cut=49;
+DotsConnection.Ntuple=1; NTupleSvc.Output += { "TestDotsHelixFitter DATAFILE='Dots_cut7.root' OPT='NEW' TYP='ROOT'"};
+
+
+#include "$KALFITALGROOT/share/job_kalfit_numf_data.txt"
+#include "$MDCDEDXALGROOT/share/job_dedx_all.txt"
+#include "$TRKEXTALGROOT/share/TrkExtAlgOption.txt"
+#include "$TOFRECROOT/share/jobOptions_TofRec.txt"
+#include "$TOFENERGYRECROOT/share/TofEnergyRecOptions_MC.txt"
+#include "$EMCRECROOT/share/EmcRecOptions.txt"
+#include "$MUCRECALGROOT/share/jobOptions_MucRec.txt"
+
+#include "$EVENTASSEMBLYROOT/share/EventAssembly.txt"
+#include "$PRIMARYVERTEXALGROOT/share/jobOptions_kalman.txt"
+#include "$VEEVERTEXALGROOT/share/jobOptions_veeVertex.txt"
+
+#include "$HLTMAKERALGROOT/share/jobOptions_HltMakerAlg.txt"
+#include "$EVENTNAVIGATORROOT/share/EventNavigator.txt"
+
+//output ROOT REC data
+//#include "$ROOTIOROOT/share/jobOptions_Rec2Root.txt"
+#include "/besfs5/users/mg20220135/software/Ks/Ks706a/jobOptions_Rec2Root_MDC_MC.txt"
+//RootWriter.ItemList += { "/Event/MC/MdcMcHit#1" };
+
+//configure of calibration constants for MC
+#include "$CALIBSVCROOT/share/calibConfig_rec_mc.txt"
+
+
+//**************job options for random number************************
+BesRndmGenSvc.RndmSeed = 1000;
+
+//Set output level threshold (2=DEBUG, 3=INFO, 4=WARNING, 5=ERROR, 6=FATAL )
+MessageSvc.OutputLevel = 5; 
+
+//ROOT input data file
+EventCnvSvc.digiRootInputFile = {"/besfs5/users/mg20220135/software/Ks/Ks706a/Ks.rtraw"};
+
+//ROOT output data file
+EventCnvSvc.digiRootOutputFile ="pid1.rec";
+
+//Number of events to be processed (default is 10)
+ApplicationMgr.EvtMax = 100;
