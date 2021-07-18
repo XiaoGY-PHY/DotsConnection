@@ -59,27 +59,27 @@ StatusCode DotsConnection::initialize(){
 	if (sc.isFailure()) {
 		return( StatusCode::FAILURE);
 	}
-	int nWire = myMdcGeomSvc->getWireSize();
-	int nLayer= myMdcGeomSvc->getLayerSize();
-	int nSuperLayer= myMdcGeomSvc->getSuperLayerSize();
-	int nSeg= myMdcGeomSvc->getSegmentNo();
+	int nWire = myMdcGeomSvc->getWireSize();             // 总信号丝数
+	int nLayer= myMdcGeomSvc->getLayerSize();            // 总层数
+	int nSuperLayer= myMdcGeomSvc->getSuperLayerSize();      // 总超层数
+	int nSeg= myMdcGeomSvc->getSegmentNo();                  // ??
 	/*cout<<"nWire = "<<nWire
 		<<"  nLayer="<<nLayer
 		<<"  nSuperLayer="<<nSuperLayer
 		<<"  nSeg="<<nSeg
 		<<endl;*/
-	int nCellTot=0;
+	int nCellTot=0;                                 // 总cell数
 	for(int i=0; i<nLayer; i++)
 	{
-		const MdcGeoLayer* aLayer = myMdcGeomSvc->Layer(i);
-		myNWire[i]=aLayer->NCell();
-		myRLayer[i]=aLayer->Radius();
+		const MdcGeoLayer* aLayer = myMdcGeomSvc->Layer(i);                    // 获取第i层
+		myNWire[i]=aLayer->NCell();                    // 第i层有myNWire[i]个信号丝（Cell）
+		myRLayer[i]=aLayer->Radius();                  // 第i层的位置（半径）
 		//cout<<"layer "<<i<<", "<<aLayer->NCell()<<" cells, slant "<<aLayer->Slant()<<", R="<<aLayer->Radius()<<endl;
 
-		double nomShift = aLayer->nomShift();
+		double nomShift = aLayer->nomShift();            //也许跟斜丝有关
 		if(nomShift>0)      myWireFlag[i]=1;
 		else if(nomShift<0) myWireFlag[i]=-1;
-		else                myWireFlag[i]=0;
+		else                myWireFlag[i]=0;             //直丝
 
 		//nCellTot+=aLayer->NCell();
 		nCellTot+=myNWire[i];
@@ -94,7 +94,7 @@ StatusCode DotsConnection::initialize(){
 			myWirePhi[i][j]=aWire->Forward().phi();
 			int iInnerLayer = i-1;
 			if(iInnerLayer>=0) {
-				for(int k=0; k<myNWire[iInnerLayer]; k++)
+				for(int k=0; k<myNWire[iInnerLayer]; k++)                  // 找本丝 wire[i][j] 上一层的左右两个丝
 				{
 					int k_last = k-1;
 					if(k_last<0) k_last=myNWire[iInnerLayer]-1;
@@ -112,7 +112,7 @@ StatusCode DotsConnection::initialize(){
 	}
 	for(int i=0; i<nLayer; i++)
 	{
-		for(int j=0; j<myNWire[i]; j++)
+		for(int j=0; j<myNWire[i]; j++)                                 // 找本丝 wire[i][j] 下一层的左右两个丝
 		{
 			int iOuterLayer = i+1;
 			if(iOuterLayer<nLayer) {
@@ -321,7 +321,7 @@ KalmanFit::Helix DotsConnection::getMCHelix()
 	return helix_truth;
 }
 
-void DotsConnection::getMcFinalChargedStates()
+void DotsConnection::getMcFinalChargedStates()               // 01 
 {
 	resetFCSVec();
 
