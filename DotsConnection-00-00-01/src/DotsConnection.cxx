@@ -76,10 +76,10 @@ StatusCode DotsConnection::initialize(){
 		myRLayer[i]=aLayer->Radius();                  // 第i层的位置（半径）
 		//cout<<"layer "<<i<<", "<<aLayer->NCell()<<" cells, slant "<<aLayer->Slant()<<", R="<<aLayer->Radius()<<endl;
 
-		double nomShift = aLayer->nomShift();            //也许跟斜丝有关
+		double nomShift = aLayer->nomShift();            //也许跟斜丝有关?
 		if(nomShift>0)      myWireFlag[i]=1;
 		else if(nomShift<0) myWireFlag[i]=-1;
-		else                myWireFlag[i]=0;             //直丝
+		else                myWireFlag[i]=0;             //直丝?
 
 		//nCellTot+=aLayer->NCell();
 		nCellTot+=myNWire[i];
@@ -639,7 +639,7 @@ void DotsConnection::associateDigisToMcParticles()
 			Hep3Vector pos(posx,posy,0);
 			Hep3Vector p3(px,py,0);
 			double dotProd = pos*p3;
-			if(dotProd<0) {
+			if(dotProd<0) {                      //coming back
 				//cout<<"      pos="<<pos<<", p3="<<p3<<endl;
 				//cout<<"      MDC digi on layer "<<layer<<" wire "<<wire<<" coming back"<<endl;
 				continue;// reject hits from track coming back
@@ -676,12 +676,12 @@ void DotsConnection::associateDigisToMcParticles()
 			// myDotsHelixFitter.setCgemClusters(myVecCgem1DCluster);
 			myDotsHelixFitter.setDChits(myVecMdcDigi,T0);
 
-			myDotsHelixFitter.fitCircleOnly();
+			myDotsHelixFitter.fitCircleOnly();               // xoy平面的拟合
 			myDotsHelixFitter.useAxialHitsOnly();
 			int nIter=0;
 			while(1)
 			{
-				fitFlag = myDotsHelixFitter.calculateNewHelix();
+				fitFlag = myDotsHelixFitter.calculateNewHelix();                 // 计算一条新的螺旋线 不断迭代 直到得到最佳螺旋线
 				nIter++;
 				//if(fitFlag!=0) break;
 				if(fitFlag==0)
@@ -727,8 +727,8 @@ void DotsConnection::associateDigisToMcParticles()
 					}
 				}
 				else break;
-				if(myDotsHelixFitter.deactiveHits(myChiCut_circle,myNmaxDeact_circle)==0) break;
-				if(nIter>100) break;
+				if(myDotsHelixFitter.deactiveHits(myChiCut_circle,myNmaxDeact_circle)==0) break;             //如果有点需要废弃（deactiveHit）重新拟合，无点需要废弃，则拟合成功，不再迭代
+				if(nIter>100) break;                                             // 迭代100次
 			}
 			if(myDebug) {
 				cout<<"initial helix "<<ini_helix.a()<<endl;
@@ -738,7 +738,7 @@ void DotsConnection::associateDigisToMcParticles()
 				cout<<"circle chi2="<<myDotsHelixFitter.getChi2()<<endl<<endl;
 			}
 			if(fitFlag==0) {
-				myDotsHelixFitter.fitModeHelix();
+				myDotsHelixFitter.fitModeHelix();                // 全螺旋线拟合
 				nIter=0;
 				while(1)
 				{
