@@ -451,6 +451,7 @@ void DotsConnection::associateDigisToMcParticles()
 	if(!mdcMcHitCol) cout<<"DotsConnection::associateDigisToMcParticles() does not find MdcMcHitCol!"<<endl;
 	if(myDebug)
 		cout<<"MDC MC hits obtained, n="<<mdcMcHitCol->size()<<endl;
+    cout<<"MDC MC hits obtained, n="<<mdcMcHitCol->size()<<endl;
 	Event::MdcMcHitCol::iterator iter_mdcMcHit = mdcMcHitCol->begin();
 	for(; iter_mdcMcHit!=mdcMcHitCol->end(); iter_mdcMcHit++ )
 	{
