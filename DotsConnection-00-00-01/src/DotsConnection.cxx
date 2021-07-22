@@ -399,7 +399,7 @@ void DotsConnection::getMcFinalChargedStates()
 				myVecHelix.push_back(helix);
 				if(myDebug)
                 {
-                    cout<<Form("trk idx %.6f, pdg code %d, mother %d", trkIdx, pid, mpid)<<endl;
+                    cout<<Form("trk idx %d, pdg code %d, mother %d", trkIdx, pid, mpid)<<endl;
                     cout<<Form("p3 = (%.6f, %.6f, %.6f)", px, py, pz)<<endl;
                     cout<<Form("pos = (%.6f, %.6f, %.6f)", pos_x, pos_y, pos_z)<<endl;
                     cout<<Form("dphi = %.6f", dphi)<<endl;
