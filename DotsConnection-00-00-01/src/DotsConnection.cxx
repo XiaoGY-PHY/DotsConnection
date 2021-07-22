@@ -451,7 +451,7 @@ void DotsConnection::associateDigisToMcParticles()
 	if(!mdcMcHitCol) cout<<"DotsConnection::associateDigisToMcParticles() does not find MdcMcHitCol!"<<endl;
 	if(myDebug)
 		cout<<"MDC MC hits obtained, n="<<mdcMcHitCol->size()<<endl;
-    cout<<"MDC MC hits obtained, n="<<mdcMcHitCol->size()<<endl;
+    // cout<<"MDC MC hits obtained, n="<<mdcMcHitCol->size()<<endl;
 	Event::MdcMcHitCol::iterator iter_mdcMcHit = mdcMcHitCol->begin();
 	for(; iter_mdcMcHit!=mdcMcHitCol->end(); iter_mdcMcHit++ )
 	{
@@ -669,7 +669,6 @@ void DotsConnection::associateDigisToMcParticles()
 				else nMdcXHits++;
 			}
 		}
-        cout<<"line 671 hello!!! next to fit helix if nMdcVHits >=2 , but nMdcVHits = "<<nMdcVHits<<endl;
 		// --- fit to Helix
 		//cout<<" start to fit "<<endl;
 		int fitFlag=99;
@@ -693,7 +692,7 @@ void DotsConnection::associateDigisToMcParticles()
 			int nIter=0;
 			while(1)
 			{
-                cout<<"line 695 hello!!!!!  fit here!"<<endl;
+                cout<<"hello!!!!!  fit here!"<<endl;
 				fitFlag = myDotsHelixFitter.calculateNewHelix();
 				nIter++;
 				//if(fitFlag!=0) break;
