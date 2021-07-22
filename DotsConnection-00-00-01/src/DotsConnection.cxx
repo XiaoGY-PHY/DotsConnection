@@ -351,6 +351,7 @@ void DotsConnection::getMcFinalChargedStates()
 		{
 			if( !( (*iter_mc)->primaryParticle() || (*iter_mc)->decayFromGenerator() || (*iter_mc)->decayInFlight() ) ) continue;
 			int pid = (*iter_mc)->particleProperty();
+            int mpid = ((*iter_mc)->mother()).particleProperty();             // xiaogy add!
 			int pid_abs = abs(pid);
 			// --- e, mu, pi, K, p
 			if(pid_abs==11||pid_abs==13||pid_abs==211||pid_abs==321||pid_abs==2212) 
@@ -386,6 +387,7 @@ void DotsConnection::getMcFinalChargedStates()
 				myVecTrkLenFirstHalf.push_back(lenInMdc);
 				// --- fill charged final states
 				int trkIdx = (*iter_mc)->trackIndex();
+                int mtrkIdx = ((*iter_mc)->mother()).trackIndex();           // xiaogy add!
 				myVecMCTrkId.push_back(trkIdx);
 				myVecPDG.push_back(pid);
 				vector<double> helix;
@@ -396,18 +398,25 @@ void DotsConnection::getMcFinalChargedStates()
 				helix.push_back(helix_truth.tanl());
 				myVecHelix.push_back(helix);
 				if(myDebug)
-					cout<<" trk idx "<<trkIdx<<", pdg code "<<pid
-						<<", p3=("<<px<<", "<<py<<", "<<pz<<")"
-						<<", pos=("<<pos_x<<","<<pos_y<<","<<pos_z<<")"
-						<<", dphi="<<dphi<<", lenOuter="<<lenOuter<<", lenInner="<<lenInner
-						<<", lenInMdc = "<<lenInMdc
-						//<<", lenInMdc = "<<lenOuter
-						<<endl;
+                {
+                    cout<<Form("trk idx %.6f, pdg code %d, mother %d", trkIdx, pid, mpid)<<endl;
+                    cout<<Form("p3 = (%.6f, %.6f, %.6f)", px, py, pz)<<endl;
+                    cout<<Form("pos = (%.6f, %.6f, %.6f)", pos_x, pos_y, pos_z)<<endl;
+                    cout<<Form("dphi = %.6f", dphi)<<endl;
+                    cout<<Form("lenOuter = %.6f, lenInner = %.6f", lenOuter,lenInner)<<endl;
+                    
+                }
+					// cout<<" trk idx "<<trkIdx<<", pdg code "<<pid
+					// 	<<", p3=("<<px<<", "<<py<<", "<<pz<<")"
+					// 	<<", pos=("<<pos_x<<","<<pos_y<<","<<pos_z<<")"
+					// 	<<", dphi="<<dphi<<", lenOuter="<<lenOuter<<", lenInner="<<lenInner
+					// 	<<", lenInMdc = "<<lenInMdc
+					// 	//<<", lenInMdc = "<<lenOuter
+					// 	<<endl;
 			}
 		}
 	}
 }
-
 
 void DotsConnection::resetFCSVec()
 {
