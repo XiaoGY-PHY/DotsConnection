@@ -668,7 +668,7 @@ void DotsConnection::associateDigisToMcParticles()
 				else nMdcXHits++;
 			}
 		}
-
+        cout<<"line 671 hello!!! next to fit helix if nMdcVHits >=2 , but nMdcVHits = "<<nMdcVHits<<endl;
 		// --- fit to Helix
 		//cout<<" start to fit "<<endl;
 		int fitFlag=99;
