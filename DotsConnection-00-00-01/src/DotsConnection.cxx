@@ -621,7 +621,7 @@ void DotsConnection::associateDigisToMcParticles()
 		iter_mdcMcHit = mdcMcHitCol->begin();
 		for(; iter_mdcMcHit!=mdcMcHitCol->end(); iter_mdcMcHit++ )
 		{
-            cout<<"line 624 hello!!!!!"<<endl;
+            // cout<<"line 624 hello!!!!!"<<endl;
 			int trkId = (*iter_mdcMcHit)->getTrackIndex();
 			if(trkId!=trkIdx) continue;
 			if((*iter_mdcMcHit)->getDigiIdx()==-9999) continue;
@@ -675,7 +675,7 @@ void DotsConnection::associateDigisToMcParticles()
 		//if((myVecCgemVcluster.size()+nMdcVHits)>=2&&(myVecCgemXcluster.size()+nMdcXHits)>=3)
 		if((nMdcVHits)>=2&&(nMdcXHits)>=3)
 		{
-            cout<<"line 678 hello!!!!!"<<endl;
+            // cout<<"line 678 hello!!!!!"<<endl;
 			HepVector a_helix(5,0);
 			a_helix(1)=myVecHelix[i][0];
 			a_helix(2)=myVecHelix[i][1];
@@ -692,7 +692,7 @@ void DotsConnection::associateDigisToMcParticles()
 			int nIter=0;
 			while(1)
 			{
-                cout<<"line 695 hello!!!!!   first fit here!"<<endl;
+                cout<<"line 695 hello!!!!!  fit here!"<<endl;
 				fitFlag = myDotsHelixFitter.calculateNewHelix();
 				nIter++;
 				//if(fitFlag!=0) break;
