@@ -634,14 +634,10 @@ void DotsConnection::associateDigisToMcParticles()
 			int wire  = MdcID::wire(id);
 			int isSec = (*iter_mdcMcHit)->getIsSecondary();
 			if(isSec!=0) {
-				/*cout<<"      MDC digi on layer "<<layer<<" wire "<<wire<<" isSec"
-					<<", pid = "<<(*iter_mdcMcHit)->getCurrentTrackPID()
-					<<endl;*/
 				continue;
 			}
 			double trkLenMcHit = ((*iter_mdcMcHit)->getFlightLength())/10.;
 			if(trkLenMcHit>1.5*trkLenInMdc) {
-				//cout<<"      MDC digi on layer "<<layer<<" wire "<<wire<<" trkLenMcHit>1.5*trkLenInMdc"<<endl;
 				continue;
 			}
 			double px=(*iter_mdcMcHit)->getMomentumX();
@@ -653,14 +649,9 @@ void DotsConnection::associateDigisToMcParticles()
 			Hep3Vector pos(posx,posy,0);
 			Hep3Vector p3(px,py,0);
 			double dotProd = pos*p3;
-			if(dotProd<0) {
-				//cout<<"      pos="<<pos<<", p3="<<p3<<endl;
-				//cout<<"      MDC digi on layer "<<layer<<" wire "<<wire<<" coming back"<<endl;
-				continue;// reject hits from track coming back
-			}
-			//Identifier id = (*iter_mdcMcHit)->identify();
-			//int layer = MdcID::layer(id);
-			//int wire  = MdcID::wire(id);
+			// if(dotProd<0) {
+			// 	continue;// reject hits from track coming back
+			// }
 			const MdcDigi* aMdcDigiPt = myMdcDigiPointer[layer][wire];
 			if(aMdcDigiPt!=NULL) 
 			{
