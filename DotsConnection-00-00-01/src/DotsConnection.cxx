@@ -404,6 +404,7 @@ void DotsConnection::getMcFinalChargedStates()
                     cout<<Form("pos = (%.6f, %.6f, %.6f)", pos_x, pos_y, pos_z)<<endl;
                     cout<<Form("dphi = %.6f", dphi)<<endl;
                     cout<<Form("lenOuter = %.6f, lenInner = %.6f", lenOuter,lenInner)<<endl;
+                    cout<<"******************************************************"<<endl;
                     
                 }
 					// cout<<" trk idx "<<trkIdx<<", pdg code "<<pid
@@ -478,14 +479,15 @@ void DotsConnection::associateDigisToMcParticles()
 			cout<<"  MDC MC hit from "<<creatorProcess
 				<<", trk "<<trkId
 				<<", isSec="<<isSec
-				<<", len="<<trkLen/10 // mm -> cm
-				<<", p3=("<<px<<", "<<py<<", "<<pz<<")"
-				<<", pos=("<<posx<<", "<<posy<<", "<<posz<<")"
-				<<", layer "<<layer<<" wire "<<wire
-				<<", dotProd="<<dotProd
+				<<", len="<<trkLen/10<<endl // mm -> cm
+				<<"                  , p3=("<<px<<", "<<py<<", "<<pz<<")"<<endl
+				<<"                  , pos=("<<posx<<", "<<posy<<", "<<posz<<")"<<endl
+				<<"                  , layer "<<layer<<" wire "<<wire<<endl
+				<<"                  , dotProd="<<dotProd
 				<<", pdg code = "<<pdgCode
 				<<", digi index = "<<digiIdx
 				<<endl;
+                cout<<"**************************************************************************************"<<endl;
 	}
 
 	// --- get MDC digi vector
@@ -524,7 +526,8 @@ void DotsConnection::associateDigisToMcParticles()
 		int trkIdx = myVecMCTrkId[i];
 		double trkLenInMdc = myVecTrkLenFirstHalf[i];
 		if(myDebug)
-			cout<<"MC particle "<<trkIdx<<", pdg code "<<myVecPDG[i]<<endl;
+			cout<<"************************************************************************"<<endl
+            <<"MC particle "<<trkIdx<<", pdg code :"<<myVecPDG[i]<<endl;
 
 		// --- associate CGEM clusters through CGEM MC hits
 		
@@ -692,7 +695,7 @@ void DotsConnection::associateDigisToMcParticles()
 			int nIter=0;
 			while(1)
 			{
-                cout<<"hello!!!!!  fit here!"<<endl;
+                cout<<"hello here!!  fit once!!!!"<<endl;
 				fitFlag = myDotsHelixFitter.calculateNewHelix();
 				nIter++;
 				//if(fitFlag!=0) break;
@@ -770,7 +773,9 @@ void DotsConnection::associateDigisToMcParticles()
 					cout<<"helix chi2="<<myDotsHelixFitter.getChi2()<<endl<<endl;
 				}
 			}
-		}
+		}else if(myDebug){
+            cout<<"      Didn't found enough hits!!!!"<<endl;
+        }
 
 		// --- save good track to RecMdcTrackCol and fill ntuple
 		//cout<<"before fill myArrayHelixMC"<<endl;
