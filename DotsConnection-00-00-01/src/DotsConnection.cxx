@@ -649,9 +649,9 @@ void DotsConnection::associateDigisToMcParticles()
 			Hep3Vector pos(posx,posy,0);
 			Hep3Vector p3(px,py,0);
 			double dotProd = pos*p3;
-			// if(dotProd<0) {
-			// 	continue;// reject hits from track coming back
-			// }
+			if(dotProd<0) {
+				continue;// reject hits from track coming back
+			}
 			const MdcDigi* aMdcDigiPt = myMdcDigiPointer[layer][wire];
 			if(aMdcDigiPt!=NULL) 
 			{
